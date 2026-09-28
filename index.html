@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARCH REACH</title>
+<meta name="description" content="ARCH REACH is a national research center dedicated to understanding and addressing unhealthy alcohol use among people living with HIV.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ============ Tokens ============ */
+  :root{
+    --ink:#191712;
+    --muted:#5C6560;
+    --paper:#F7F2E8;
+    --surface:#FFFFFF;
+    --surface-2:#EFEAD9;
+    --line:#DDD5C2;
+    --teal:#0B4A4A;
+    --teal-deep:#062F30;
+    --teal-tint:#DCEAE7;
+    --terracotta:#C1440E;
+    --terracotta-tint:#F6DCC8;
+    --gold:#9C6A00;
+    --gold-tint:#F1E2BC;
+    --shadow: 0 1px 2px rgba(20,30,28,0.06), 0 8px 24px -12px rgba(20,30,28,0.18);
+    --radius: 10px;
+    --focus: #178F86;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#EDEFED;
+      --muted:#9FB3AE;
+      --paper:#0E1B1A;
+      --surface:#152827;
+      --surface-2:#1B322F;
+      --line:#28403C;
+      --teal:#5CBAB5;
+      --teal-deep:#8AD2CD;
+      --teal-tint:#173430;
+      --terracotta:#E2916D;
+      --terracotta-tint:#2E2019;
+      --gold:#E3B85E;
+      --gold-tint:#2B2416;
+      --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 28px -14px rgba(0,0,0,0.6);
+      --focus:#7FD6D1;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#EDEFED;
+    --muted:#9FB3AE;
+    --paper:#0E1B1A;
+    --surface:#152827;
+    --surface-2:#1B322F;
+    --line:#28403C;
+    --teal:#5CBAB5;
+    --teal-deep:#8AD2CD;
+    --teal-tint:#173430;
+    --terracotta:#E2916D;
+    --terracotta-tint:#2E2019;
+    --gold:#E3B85E;
+    --gold-tint:#2B2416;
+    --shadow: 0 1px 2px rgba(0,0,0,0.4), 0 12px 28px -14px rgba(0,0,0,0.6);
+    --focus:#7FD6D1;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Public Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:"Fraunces", Georgia, "Iowan Old Style", serif;
+    font-weight:600;
+    color:var(--ink);
+    text-wrap:balance;
+    margin:0 0 0.5em;
+  }
+  a{color:var(--teal);}
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{
+    outline:2px solid var(--focus);
+    outline-offset:2px;
+  }
+  button, select{font-family:inherit;}
+  .eyebrow{
+    font-size:0.78rem;
+    font-weight:700;
+    letter-spacing:0.09em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+  }
+  .wrap{max-width:1600px; margin:0 auto; padding:0 40px;}
+  .prose p{max-width:64ch;}
+
+  /* ============ Draft banner ============ */
+  .draftbar{
+    background:var(--gold-tint);
+    color:var(--ink);
+    border-bottom:1px solid var(--line);
+    text-align:center;
+    font-size:0.82rem;
+    padding:7px 12px;
+    letter-spacing:0.01em;
+  }
+  .draftbar strong{color:var(--terracotta);}
+
+  /* ============ Nav ============ */
+  header.site{
+    position:sticky; top:0; z-index:40;
+    background:var(--surface);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; gap:28px;
+    padding-top:14px; padding-bottom:14px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:"Fraunces", serif; font-weight:600; font-size:1.18rem;
+    color:var(--ink); text-decoration:none; white-space:nowrap;
+    background:none; border:none; cursor:pointer; padding:0;
+  }
+  .brand svg{display:block;}
+  .navlinks{
+    display:flex; gap:4px; margin-left:auto; flex-wrap:wrap;
+  }
+  .navlinks button{
+    background:none; border:none; cursor:pointer;
+    font-size:0.95rem; font-weight:600; color:var(--muted);
+    padding:8px 12px; border-radius:8px; position:relative;
+  }
+  .navlinks button:hover{ color:var(--ink); background:var(--surface-2); }
+  .navlinks button[aria-current="page"]{ color:var(--teal-deep); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .navlinks button[aria-current="page"]{ color: var(--teal); } }
+  :root[data-theme="dark"] .navlinks button[aria-current="page"]{ color: var(--teal); }
+  .navlinks button[aria-current="page"]::after{
+    content:""; position:absolute; left:12px; right:12px; bottom:2px; height:2px;
+    background:var(--terracotta); border-radius:2px;
+  }
+
+  /* ============ Sub-nav (About Us) ============ */
+  .subnav{
+    border-bottom:1px solid var(--line);
+    background:var(--surface-2);
+  }
+  .subnavlinks{ display:flex; gap:4px; flex-wrap:wrap; padding-top:10px; padding-bottom:10px; }
+  .subnavlinks button{
+    background:transparent; border:1px solid transparent; cursor:pointer;
+    font-size:0.87rem; font-weight:600; color:var(--muted);
+    padding:6px 13px; border-radius:20px;
+  }
+  .subnavlinks button:hover{ color:var(--ink); border-color:var(--line); }
+  .subnavlinks button[aria-current="true"]{
+    background:var(--teal); color:#fff; border-color:var(--teal);
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .subnavlinks button[aria-current="true"]{ color:#082220; } }
+  :root[data-theme="dark"] .subnavlinks button[aria-current="true"]{ color:#082220; }
+
+  /* ============ Buttons ============ */
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-weight:700; font-size:0.95rem; text-decoration:none;
+    padding:11px 20px; border-radius:8px; border:1px solid transparent; cursor:pointer;
+  }
+  .btn-primary{ background:var(--teal); color:#fff; }
+  .btn-primary:hover{ background:var(--teal-deep); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .btn-primary{ color:#082220; } }
+  :root[data-theme="dark"] .btn-primary{ color:#082220; }
+  .btn-ghost{ background:transparent; color:var(--ink); border-color:var(--line); }
+  .btn-ghost:hover{ background:var(--surface-2); }
+
+  /* ============ Page shell ============ */
+  main{ padding-bottom:80px; }
+  .page{ display:none; }
+  .page.active{ display:block; }
+  .about-panel{ display:none; }
+  .about-panel.active{ display:block; }
+  section{ padding-top:56px; }
+  section.tight{ padding-top:30px; }
+  .section-head{ margin-bottom:26px; }
+  .section-head p{ color:var(--muted); max-width:64ch; }
+
+  /* ============ Hero ============ */
+  .hero{
+    position:relative; overflow:hidden;
+    padding:74px 0 60px;
+    background:#062F30;
+  }
+  .hero .wrap{ position:relative; z-index:2; }
+  .hero .eyebrow{ color:#F2C9A8; }
+  .hero h1{ font-size:clamp(2.2rem, 5vw, 3.75rem); max-width:22ch; margin-top:14px; line-height:1.1; color:#fff; }
+  .hero .lede{ font-size:1.2rem; color:#CFE6E1; max-width:75ch; margin:20px 0 32px; }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; }
+  .hero .btn-primary{ background:var(--terracotta); }
+  .hero .btn-primary:hover{ background:#A3390A; }
+  .hero .btn-ghost{ background:rgba(255,255,255,0.08); color:#fff; border-color:rgba(255,255,255,0.35); }
+  .hero .btn-ghost:hover{ background:rgba(255,255,255,0.16); }
+
+  .cardgrid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+    gap:18px; margin-top:0;
+  }
+  .linkcard{
+    display:block; text-decoration:none; color:inherit;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px 20px 22px; box-shadow:var(--shadow); cursor:pointer;
+  }
+  .linkcard:hover{ border-color:var(--teal); }
+  .linkcard .k{ font-family:"Fraunces",serif; font-weight:600; font-size:1.12rem; margin-bottom:6px; display:block; }
+  .linkcard p{ margin:0; color:var(--muted); font-size:0.93rem; }
+  .linkcard .arrow{ color:var(--terracotta); font-weight:700; }
+
+  .latest-strip{
+    margin-top:56px; border-top:1px solid var(--line); padding-top:28px;
+    display:grid; grid-template-columns:1fr 1fr; gap:24px;
+  }
+  @media (max-width:720px){ .latest-strip{ grid-template-columns:1fr; } }
+  .latest-item{ display:flex; gap:14px; align-items:flex-start; }
+  .latest-tag{
+    font-size:0.72rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--teal-deep); background:var(--teal-tint); padding:3px 9px; border-radius:20px; white-space:nowrap;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .latest-tag{ color:var(--teal); } }
+  :root[data-theme="dark"] .latest-tag{ color:var(--teal); }
+  .latest-item h3{ font-size:1rem; margin:2px 0 4px; }
+  .latest-item p{ margin:0; color:var(--muted); font-size:0.9rem; }
+
+  /* ============ Profile blocks (cores) ============ */
+  .profilegrid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:20px; }
+  .profile{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px 24px 26px; box-shadow:var(--shadow);
+    border-top:3px solid var(--accent, var(--teal));
+  }
+  .profile .aff{ color:var(--muted); font-style:italic; font-size:0.88rem; margin:2px 0 10px; }
+  .profile .lead{ font-size:0.88rem; margin-bottom:12px; }
+  .profile .lead b{ color:var(--ink); }
+  .profile p.desc{ font-size:0.94rem; color:var(--ink); margin:0; }
+  .profile h3{ font-size:1.12rem; margin-bottom:2px; }
+
+  .placeholder-card{
+    border:1.5px dashed var(--line); border-radius:var(--radius); padding:22px;
+    color:var(--muted); font-size:0.92rem; background:var(--surface-2);
+  }
+  .teamnote{ display:flex; gap:16px; align-items:flex-start; }
+
+  /* ============ Project detail (About Us > project sub-tabs) ============ */
+  .research-item{
+    border:1px solid var(--line); border-radius:var(--radius); background:var(--surface);
+    padding:28px; margin-bottom:22px; box-shadow:var(--shadow);
+    border-left:4px solid var(--accent, var(--teal));
+  }
+  .research-item .aff{ color:var(--muted); font-style:italic; font-size:0.9rem; margin:2px 0 6px;}
+  .research-item h2{ font-size:1.4rem; margin-bottom:2px; }
+  .research-item .lede{ font-size:0.97rem; margin:14px 0 4px; max-width:70ch; }
+  .triptych{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:20px;
+  }
+  @media (max-width:800px){ .triptych{ grid-template-columns:1fr; } }
+  .triptych .col .lbl{
+    font-size:0.72rem; font-weight:700; letter-spacing:0.07em; text-transform:uppercase;
+    color:var(--accent, var(--teal)); margin-bottom:6px; display:block;
+  }
+  .triptych .col p{ font-size:0.92rem; margin:0; color:var(--ink); }
+  .tagpill{
+    display:inline-flex; align-items:center; gap:6px; margin-top:20px;
+    font-size:0.82rem; font-weight:700; color:var(--teal-deep); background:var(--teal-tint);
+    padding:6px 12px; border-radius:20px; border:none; cursor:pointer;
+  }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tagpill{ color:var(--teal); } }
+  :root[data-theme="dark"] .tagpill{ color:var(--teal); }
+  .tagpill:hover{ filter:brightness(0.95); }
+
+  /* ============ Notes / banners ============ */
+  .note{
+    background:var(--gold-tint); border-left:3px solid var(--gold);
+    border-radius:6px; padding:14px 18px; font-size:0.88rem; color:var(--ink);
+    margin-bottom:26px;
+  }
+
+  /* ============ Papers ============ */
+  .papercard{
+    border:1px solid var(--line); border-radius:var(--radius); background:var(--surface);
+    padding:22px 24px; margin-bottom:16px; box-shadow:var(--shadow);
+  }
+  .papercard .meta{ display:flex; gap:10px; align-items:center; margin-bottom:8px; flex-wrap:wrap; }
+  .papercard .year{ font-size:0.82rem; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .papercard h3{ font-size:1.05rem; margin:0 0 4px; }
+  .papercard .cite{ font-size:0.85rem; color:var(--muted); margin:0 0 10px; }
+  .papercard .summary{ font-size:0.92rem; margin:0; }
+  .papercard .summary .lbl{ font-weight:700; color:var(--teal-deep); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .papercard .summary .lbl{ color:var(--teal); } }
+  :root[data-theme="dark"] .papercard .summary .lbl{ color:var(--teal); }
+
+  /* ============ News ============ */
+  .newsline{ border-left:2px solid var(--line); padding-left:26px; margin-left:6px; }
+  .newsitem{ position:relative; padding-bottom:32px; }
+  .newsitem::before{
+    content:""; position:absolute; left:-31px; top:4px; width:10px; height:10px;
+    border-radius:50%; background:var(--terracotta); border:2px solid var(--paper);
+  }
+  .newsitem .date{ font-size:0.78rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--muted); }
+  .newsitem h3{ font-size:1.1rem; margin:4px 0 6px; }
+  .newsitem p{ margin:0; color:var(--ink); font-size:0.95rem; max-width:64ch; }
+
+  .signup{
+    margin-top:40px; padding:26px; border-radius:var(--radius); background:var(--teal-tint);
+    display:flex; gap:14px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  }
+  .signup h3{ margin:0 0 4px; font-size:1.05rem; }
+  .signup p{ margin:0; color:var(--muted); font-size:0.88rem; }
+  .signup form{ display:flex; gap:10px; flex-wrap:wrap; }
+  .signup input[type="email"]{
+    padding:10px 14px; border-radius:8px; border:1px solid var(--line); font-size:0.9rem;
+    min-width:220px; background:var(--surface); color:var(--ink);
+  }
+
+  /* ============ Contact ============ */
+  .contact-wrap{ max-width:640px; margin-top:8px; }
+  .namerow{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:520px){ .namerow{ grid-template-columns:1fr; } }
+  form.contactform{ display:flex; flex-direction:column; gap:16px; margin-top:22px; }
+  form.contactform label{ font-size:0.85rem; font-weight:600; margin-bottom:6px; display:block; }
+  form.contactform .req{ color:var(--terracotta); }
+  form.contactform input, form.contactform textarea, form.contactform select{
+    width:100%; padding:11px 13px; border-radius:8px; border:1px solid var(--line);
+    font-family:inherit; font-size:0.94rem; background:var(--surface); color:var(--ink);
+  }
+  form.contactform textarea{ min-height:130px; resize:vertical; }
+  .formfoot{ font-size:0.82rem; color:var(--muted); margin-top:4px; }
+
+  /* ============ Footer ============ */
+  footer{ border-top:1px solid var(--line); background:var(--surface); }
+  .footgrid{
+    display:grid; grid-template-columns:1.6fr 1fr; gap:32px;
+    padding-top:40px; padding-bottom:22px;
+  }
+  @media (max-width:800px){ .footgrid{ grid-template-columns:1fr; } }
+  .footgrid h4{ font-size:0.78rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); margin:0 0 12px; }
+  .footgrid .brand{ font-size:1.1rem; margin-bottom:8px; }
+  .footgrid p{ color:var(--muted); font-size:0.86rem; margin:0 0 8px; max-width:44ch; }
+  .footlinks{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+  .footlinks button{
+    background:none; border:none; padding:0; font-size:0.9rem; color:var(--ink); cursor:pointer; text-align:left;
+  }
+  .footlinks button:hover{ color:var(--teal); }
+  .footbottom{
+    border-top:1px solid var(--line); padding-top:16px; padding-bottom:28px;
+    font-size:0.8rem; color:var(--muted); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+
+  /* ============ Toast ============ */
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:var(--paper); padding:11px 20px; border-radius:8px;
+    font-size:0.88rem; box-shadow:var(--shadow); opacity:0; pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease; z-index:100; max-width:80vw; text-align:center;
+  }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .toast{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="draftbar">🔒 <strong>Draft preview</strong> — private working copy for internal review, not the live ARCH REACH site. Sample names, papers, and news items are placeholders.</div>
+
+<header class="site">
+  <nav class="wrap">
+    <button class="brand" data-nav="home" aria-label="ARCH REACH home">
+      ARCH&nbsp;REACH
+    </button>
+    <div class="navlinks" role="tablist" aria-label="Site sections">
+      <button data-nav="home">Home</button>
+      <button data-nav="about">About Us</button>
+      <button data-nav="papers">Papers</button>
+      <button data-nav="news">News</button>
+      <button data-nav="contact">Contact</button>
+    </div>
+  </nav>
+  <div class="subnav" id="aboutSubnav" hidden>
+    <div class="wrap subnavlinks" role="tablist" aria-label="About Us sections">
+      <button data-about-sub="overview">Overview</button>
+      <button data-about-sub="team">Team</button>
+      <button data-about-sub="cores">The Cores</button>
+      <button data-about-sub="era">ARCH ERA</button>
+      <button data-about-sub="tbai">T-BAI</button>
+      <button data-about-sub="star">ARCH-STAR</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HOME ============ -->
+  <div class="page" id="page-home">
+    <section class="hero" style="padding-top:0;">
+      <div class="wrap">
+        <div class="eyebrow">A National Research Center on Alcohol Use and HIV Care</div>
+        <h1>Advancing health at the intersection of alcohol use and HIV care.</h1>
+        <p class="lede">ARCH REACH is a national research center dedicated to understanding and addressing unhealthy alcohol use among people living with HIV. We work to make effective treatment more accessible and help people stay engaged in HIV care, through rigorous research, real-world clinical programs, and close partnership with the communities most affected.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" data-about-nav="era">See our research →</button>
+          <button class="btn btn-ghost" data-about-nav="team">Meet the team</button>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="cardgrid">
+          <button class="linkcard" data-about-nav="overview" style="text-align:left;border:none;font:inherit;">
+            <span class="k">About Us <span class="arrow">↗</span></span>
+            <p>Our mission, our three Cores, our research projects, and the people behind ARCH REACH.</p>
+          </button>
+          <button class="linkcard" data-nav="papers" style="text-align:left;border:none;font:inherit;">
+            <span class="k">Papers <span class="arrow">↗</span></span>
+            <p>Publications from our team, with plain-language summaries for a general audience.</p>
+          </button>
+          <button class="linkcard" data-nav="news" style="text-align:left;border:none;font:inherit;">
+            <span class="k">News <span class="arrow">↗</span></span>
+            <p>Center announcements, milestones, and community updates.</p>
+          </button>
+        </div>
+
+        <div class="latest-strip">
+          <div class="latest-item">
+            <span class="latest-tag">News</span>
+            <div>
+              <h3>Transdisciplinary Community Partner Board convenes</h3>
+              <p>The Dissemination Core welcomed the center's first community partner meeting this July.</p>
+            </div>
+          </div>
+          <div class="latest-item">
+            <span class="latest-tag">Paper</span>
+            <div>
+              <h3>Study protocol published for our stepped-care trial</h3>
+              <p>Details how we're testing hands-on support for HIV clinics adopting stepped alcohol care, published in <em>Addiction Science &amp; Clinical Practice</em>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ ABOUT ============ -->
+  <div class="page" id="page-about">
+    <div class="wrap">
+      <section class="tight" style="padding-bottom:0;">
+        <div class="eyebrow">About Us</div>
+        <h1 style="margin-bottom:4px;">About ARCH REACH</h1>
+      </section>
+
+      <!-- Overview -->
+      <div class="about-panel" id="about-overview">
+        <section>
+          <div class="prose">
+            <p>ARCH REACH is a national research center that brings together scientists, clinicians, and community members to improve the health and well-being of people living with HIV. Our focus is on understanding and addressing unhealthy alcohol use among people with HIV, in a way that is grounded in and shaped by the experiences of the people most affected.</p>
+            <p>Alcohol use can make it harder for people with HIV to stay engaged in care, take medication consistently, and manage the other health conditions that can come with aging. It rarely happens in isolation — it's often connected to mental health, stigma, and the broader social and economic conditions in someone's life. ARCH REACH studies these connections and develops, tests, and shares practical ways to help.</p>
+            <p>Funded by the National Institutes of Health (NIH), ARCH REACH builds on more than a decade of research through the Alcohol Research Consortium in HIV (ARCH) and draws on data and infrastructure from CNICS, a network of HIV clinics across the United States that follows nearly 50,000 people with HIV over time. The center's work is organized around three research projects — <a href="#" data-about-nav="era">ARCH ERA</a>, <a href="#" data-about-nav="tbai">T-BAI</a>, and <a href="#" data-about-nav="star">ARCH-STAR</a> — supported by <a href="#" data-about-nav="cores">three Cores</a>, and guided throughout by a community partner board made up of people with lived experience.</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Team -->
+      <div class="about-panel" id="about-team">
+        <section>
+          <div class="section-head">
+            <h2>Our Team</h2>
+            <p>Leadership, investigators, staff, and trainees across ARCH REACH's Cores and projects.</p>
+          </div>
+          <div class="placeholder-card teamnote">
+            <span style="font-size:1.4rem;">🖼️</span>
+            <div>
+              <strong style="color:var(--ink);">Full roster coming soon.</strong> This page will list ARCH REACH's leadership, investigators, staff, and trainees by Core and Project, with photos and short bios — plus recognition for the Transdisciplinary Community Partner Board (TCPB), similar to a Directory page.
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Cores -->
+      <div class="about-panel" id="about-cores">
+        <section>
+          <div class="section-head">
+            <h2>The Cores</h2>
+            <p>Three Cores provide the infrastructure, scientific rigor, and community connection that make ARCH REACH's research possible.</p>
+          </div>
+          <div class="profilegrid">
+            <div class="profile" style="--accent:var(--teal);">
+              <h3>Administrative Core</h3>
+              <p class="aff">University of Washington</p>
+              <p class="desc">Keeps ARCH REACH running smoothly — coordinating communication across Cores and projects, overseeing timelines, budgets, and regulatory compliance, and supporting the training of students and early-career researchers. Also convenes the Steering Committee and Program Advisory Committee.</p>
+            </div>
+            <div class="profile" style="--accent:var(--gold);">
+              <h3>Methods Core</h3>
+              <p class="aff">University of Washington</p>
+              <p class="desc">Provides the scientific and statistical expertise behind ARCH REACH's research — designing rigorous studies, developing advanced statistical approaches for how alcohol use, HIV, and social factors intersect, and helping translate findings into real-world practice.</p>
+            </div>
+            <div class="profile" style="--accent:var(--terracotta);">
+              <h3>Dissemination Core</h3>
+              <p class="aff">Tulane University</p>
+              <p class="desc">Connects ARCH REACH's research with the people it's meant to help — leading the Transdisciplinary Community Partner Board, training researchers in community-engaged methods, and sharing findings with the public, providers, and policymakers.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Project: ARCH ERA -->
+      <div class="about-panel" id="about-era">
+        <section>
+          <div class="research-item" style="--accent:var(--terracotta); margin-bottom:0;">
+            <div class="eyebrow" style="color:var(--terracotta);">Project 1</div>
+            <h2>ARCH ERA — Epidemiological Research Arm</h2>
+            <p class="aff">University of Washington</p>
+            <p class="lede">Uses data from nearly 50,000 people with HIV to understand how alcohol use affects HIV care, medication adherence, and age-related health conditions over time.</p>
+            <div class="triptych">
+              <div class="col">
+                <span class="lbl">What we're studying</span>
+                <p>How alcohol use — and treatment for it — relates to staying in HIV care, medication adherence, and age-related conditions like sleep, bone, and kidney problems.</p>
+              </div>
+              <div class="col">
+                <span class="lbl">Who's involved</span>
+                <p>Analysis of CNICS, a network of HIV clinics across the U.S. following nearly 50,000 people with HIV over time.</p>
+              </div>
+              <div class="col">
+                <span class="lbl">Why it matters</span>
+                <p>Identifies which newer treatments and social factors — like housing and discrimination — matter most, so care can be better targeted.</p>
+              </div>
+            </div>
+            <button class="tagpill" data-nav="papers">Related publications →</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Project: T-BAI -->
+      <div class="about-panel" id="about-tbai">
+        <section>
+          <div class="research-item" style="--accent:var(--terracotta); margin-bottom:0;">
+            <div class="eyebrow" style="color:var(--terracotta);">Project 2</div>
+            <h2>T-BAI — Telephone-Based Brief Alcohol Intervention</h2>
+            <p class="aff">University of Washington</p>
+            <p class="lede">Adapts an effective in-person and computer-based counseling program for delivery over the phone, then pilot-tests it with patients at Seattle-area HIV clinics.</p>
+            <div class="triptych">
+              <div class="col">
+                <span class="lbl">What we're studying</span>
+                <p>Whether an effective in-person/computer counseling program for unhealthy alcohol use works just as well delivered over the phone.</p>
+              </div>
+              <div class="col">
+                <span class="lbl">Who's involved</span>
+                <p>Patients and clinicians at UW/Harborview HIV clinics help redesign the program; a small pilot study then tests it with patients.</p>
+              </div>
+              <div class="col">
+                <span class="lbl">Why it matters</span>
+                <p>Makes counseling accessible to people without reliable internet, a computer, or transportation to an in-person visit.</p>
+              </div>
+            </div>
+            <button class="tagpill" data-nav="papers">Related publications →</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- Project: ARCH-STAR -->
+      <div class="about-panel" id="about-star">
+        <section>
+          <div class="research-item" style="--accent:var(--terracotta); margin-bottom:0;">
+            <div class="eyebrow" style="color:var(--terracotta);">Project 3</div>
+            <h2>ARCH-STAR — Syndemic Conditions Treatment Arm</h2>
+            <p class="aff">UC San Diego &amp; University of Miami</p>
+            <p class="lede">Offers layered, "stepped" support for people with HIV whose unhealthy alcohol use occurs alongside depression or anxiety — starting light, and stepping up to combined therapy when needed.</p>
+            <div class="triptych">
+              <div class="col">
+                <span class="lbl">What we're studying</span>
+                <p>A "stepped" model of care for people with HIV whose unhealthy alcohol use occurs alongside depression or anxiety.</p>
+              </div>
+              <div class="col">
+                <span class="lbl">Who's involved</span>
+                <p>Patients at HIV clinics in San Diego and Miami, starting with lighter-touch online support before stepping up as needed.</p>
+              </div>
+              <div class="col">
+                <span class="lbl">Why it matters</span>
+                <p>Tests whether combined therapy for alcohol use and mental health can be delivered at scale in everyday clinic settings.</p>
+              </div>
+            </div>
+            <button class="tagpill" data-nav="papers">Related publications →</button>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ PAPERS ============ -->
+  <div class="page" id="page-papers">
+    <div class="wrap">
+      <section>
+        <div class="section-head">
+          <div class="eyebrow">Papers</div>
+          <h1>Publications</h1>
+          <p>Peer-reviewed work from the ARCH REACH team, in plain language.</p>
+        </div>
+        <div id="paperList">
+          <div class="papercard">
+            <div class="meta"><span class="year">2026</span></div>
+            <h3><a href="https://pubmed.ncbi.nlm.nih.gov/41348309/" target="_blank" rel="noopener">Healthcare Provider Perceptions on Screening and Treatment for Unhealthy Alcohol Use in HIV Primary Care Settings</a></h3>
+            <p class="cite">Kennedy AJ, et al. <em>AIDS and Behavior</em></p>
+            <p class="summary"><span class="lbl">Summary: </span>Interviews with 19 healthcare providers across three HIV clinics found that mixed confidence in screening tools, discomfort with alcohol medications, and competing priorities make it harder to address unhealthy alcohol use in HIV care — while embedding alcohol treatment directly in HIV clinics, having a clinical champion, and offering telemedicine made it easier.</p>
+          </div>
+          <div class="papercard">
+            <div class="meta"><span class="year">2026</span></div>
+            <h3><a href="https://pubmed.ncbi.nlm.nih.gov/41918133/" target="_blank" rel="noopener">Practice facilitation to implement stepped care for unhealthy alcohol use in HIV clinics: study protocol for a type III hybrid effectiveness-implementation study</a></h3>
+            <p class="cite">Chander G, et al. <em>Addiction Science &amp; Clinical Practice</em></p>
+            <p class="summary"><span class="lbl">Summary: </span>This paper lays out the design of the ARCH REACH clinical study: testing whether hands-on support for clinic staff, called practice facilitation, helps HIV clinics successfully adopt a "stepped" model of alcohol care that starts with brief counseling and steps up to more intensive treatment for patients who need it.</p>
+          </div>
+          <div class="papercard">
+            <div class="meta"><span class="year">2025</span></div>
+            <h3><a href="https://pubmed.ncbi.nlm.nih.gov/41260023/" target="_blank" rel="noopener">Brief report: Are changes in cannabis use frequency associated with changes in alcohol use and smoking among people with HIV (PWH) — a substitution question</a></h3>
+            <p class="cite">Whitney BM, et al. <em>Drug and Alcohol Dependence</em></p>
+            <p class="summary"><span class="lbl">Summary: </span>Some have hypothesized that using more cannabis might lead people to cut back on alcohol or cigarettes. In a large group of people with HIV followed over more than a decade, the opposite was true: increasing cannabis use was linked to more drinking days and higher odds of hazardous drinking, while cutting back on cannabis was linked to less alcohol and cigarette use.</p>
+          </div>
+          <div class="papercard">
+            <div class="meta"><span class="year">2025</span></div>
+            <h3><a href="https://pubmed.ncbi.nlm.nih.gov/40792693/" target="_blank" rel="noopener">Alcohol use disorder, but not current alcohol use, is associated with falls among people with HIV in care</a></h3>
+            <p class="cite">Dai M, et al. <em>AIDS</em></p>
+            <p class="summary"><span class="lbl">Summary: </span>Looking at nearly 5,700 people with HIV in care, researchers found that having an alcohol use disorder diagnosis — but not alcohol use itself — was linked to a higher risk of falling in the past year, suggesting something other than being drunk in the moment may explain the connection.</p>
+          </div>
+          <div class="papercard">
+            <div class="meta"><span class="year">2024</span></div>
+            <h3><a href="https://pubmed.ncbi.nlm.nih.gov/38421512/" target="_blank" rel="noopener">Association of Alcohol Use with COVID-19 Infection and Hospitalization Among People Living with HIV in the United States, 2020</a></h3>
+            <p class="cite">Xia C, et al. <em>AIDS and Behavior</em></p>
+            <p class="summary"><span class="lbl">Summary: </span>Using health records from over 5,000 people with HIV in care during 2020, this study found that rates of COVID-19 diagnosis and hospitalization were somewhat higher among people who drank more, though the differences were not statistically significant — suggesting alcohol use had, at most, a modest effect on COVID-19 risk in this group.</p>
+          </div>
+          <div class="papercard">
+            <div class="meta"><span class="year">2024</span></div>
+            <h3><a href="https://pubmed.ncbi.nlm.nih.gov/38150572/" target="_blank" rel="noopener">Evaluating the Sick Quitting Hypothesis for Frailty Status and Reducing Alcohol Use Among People With HIV in a Longitudinal Clinical Cohort Study</a></h3>
+            <p class="cite">Ruderman SA, et al. <em>Journal of the Association of Nurses in AIDS Care</em></p>
+            <p class="summary"><span class="lbl">Summary: </span>"Sick quitting" describes people cutting back on alcohol because their health is declining, which can make alcohol look protective against frailty in research when it isn't. This study followed over 5,600 people with HIV and found that those who became frail were more likely to later quit or cut back on drinking, supporting sick quitting as an explanation researchers need to account for.</p>
+          </div>
+          <div class="papercard">
+            <div class="meta"><span class="year">2023</span></div>
+            <h3><a href="https://pubmed.ncbi.nlm.nih.gov/37442307/" target="_blank" rel="noopener">Alcohol use and the longitudinal HIV care continuum for people with HIV who enrolled in care between 2011 and 2019</a></h3>
+            <p class="cite">Lesko CR, et al. <em>Annals of Epidemiology</em></p>
+            <p class="summary"><span class="lbl">Summary: </span>Following nearly 1,800 people with HIV for several years after they entered care, this study found that those who reported unhealthy or moderate alcohol use at the start spent more time out of HIV care than those who didn't drink, though alcohol use wasn't linked to differences in time spent virally suppressed.</p>
+          </div>
+          <div class="papercard">
+            <div class="meta"><span class="year">2023</span></div>
+            <h3><a href="https://pubmed.ncbi.nlm.nih.gov/37476695/" target="_blank" rel="noopener">The temporal relationship of alcohol use and subsequent self-reported health status among people with HIV</a></h3>
+            <p class="cite">Pytell JD, et al. <em>The American Journal of Medicine Open</em></p>
+            <p class="summary"><span class="lbl">Summary: </span>In a study of over 5,000 people with HIV, heavy alcohol use was linked to worse self-reported health at later visits among women, but not among men — a pattern not explained by depression symptoms, suggesting the health effects of drinking may differ by gender.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ NEWS ============ -->
+  <div class="page" id="page-news">
+    <div class="wrap">
+      <section>
+        <div class="section-head">
+          <div class="eyebrow">News</div>
+          <h1>News &amp; Updates</h1>
+          <p>What's happening across ARCH REACH's Cores, projects, and community partnerships.</p>
+        </div>
+        <div class="note"><strong>Sample posts shown for layout</strong> — replace with real center updates once available.</div>
+
+        <div class="newsline">
+          <div class="newsitem">
+            <span class="date">August 2026</span>
+            <h3>ARCH REACH launches</h3>
+            <p>ARCH REACH officially begins its first project year, building on more than a decade of ARCH research within CNICS.</p>
+          </div>
+          <div class="newsitem">
+            <span class="date">July 2026</span>
+            <h3>Transdisciplinary Community Partner Board convenes</h3>
+            <p>The Dissemination Core welcomed the center's first community partner board meeting, bringing together members with lived experience to help shape ARCH REACH's research priorities.</p>
+          </div>
+          <div class="newsitem">
+            <span class="date">June 2026</span>
+            <h3>T-BAI design sessions begin</h3>
+            <p>The T-BAI team began human-centered design sessions with patients and clinicians at UW/Harborview HIV clinics to adapt an existing alcohol counseling program for telephone delivery.</p>
+          </div>
+          <div class="newsitem">
+            <span class="date">May 2026</span>
+            <h3>ARCH-STAR site preparation underway</h3>
+            <p>Teams at UC San Diego and the University of Miami began preparing clinic workflows for the ARCH-STAR stepped-care pilot addressing unhealthy alcohol use and co-occurring depression or anxiety.</p>
+          </div>
+        </div>
+
+        <div class="signup">
+          <div>
+            <h3>Get updates by email</h3>
+            <p>A monthly note on new findings, papers, and events. (Draft — not yet connected.)</p>
+          </div>
+          <form id="newsletterForm">
+            <input type="email" placeholder="you@example.com" aria-label="Email address" required>
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ============ CONTACT ============ -->
+  <div class="page" id="page-contact">
+    <div class="wrap">
+      <section>
+        <div class="section-head">
+          <div class="eyebrow">Contact</div>
+          <h1>Contact Us</h1>
+        </div>
+        <div class="contact-wrap">
+          <form class="contactform" id="contactForm">
+            <div class="namerow">
+              <div>
+                <label for="cf-first">First name <span class="req">*</span></label>
+                <input id="cf-first" type="text" required>
+              </div>
+              <div>
+                <label for="cf-last">Last name <span class="req">*</span></label>
+                <input id="cf-last" type="text" required>
+              </div>
+            </div>
+            <div>
+              <label for="cf-email">Email <span class="req">*</span></label>
+              <input id="cf-email" type="email" required>
+            </div>
+            <div>
+              <label for="cf-role">You are a <span class="req">*</span></label>
+              <select id="cf-role" required>
+                <option value="" disabled selected>Select one…</option>
+                <option>Person with HIV</option>
+                <option>Community member / partner</option>
+                <option>Researcher / clinician</option>
+                <option>Member of the media</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label for="cf-msg">Question or comment <span class="req">*</span></label>
+              <textarea id="cf-msg" required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit" style="align-self:flex-start;">Send message</button>
+            <p class="formfoot">Draft note: this prototype opens your email app addressed to <strong>samselsky@gmail.com</strong> with the form details filled in. Swap in a real inbox or form service before launch.</p>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap footgrid">
+    <div>
+      <div class="brand" style="pointer-events:none;">
+        ARCH REACH
+      </div>
+      <p>A national research center on alcohol use and HIV care, supported by the National Institutes of Health / National Institute on Alcohol Abuse and Alcoholism.</p>
+      <p>Partner institutions: University of Washington · Tulane University · UC San Diego · University of Miami</p>
+    </div>
+    <div>
+      <h4>Site</h4>
+      <ul class="footlinks">
+        <li><button data-nav="home">Home</button></li>
+        <li><button data-nav="about">About Us</button></li>
+        <li><button data-nav="papers">Papers</button></li>
+        <li><button data-nav="news">News</button></li>
+        <li><button data-nav="contact">Contact</button></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footbottom">
+    <span>Private draft — for internal review only.</span>
+    <span>ARCH REACH · draft site preview</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  (function(){
+    var pages = ["home","about","papers","news","contact"];
+    var aboutSubs = ["overview","team","cores","era","tbai","star"];
+    var aboutSubnavEl = document.getElementById('aboutSubnav');
+
+    function showAboutSub(sub){
+      if(aboutSubs.indexOf(sub) === -1) sub = "overview";
+      aboutSubs.forEach(function(s){
+        var el = document.getElementById('about-' + s);
+        if(el) el.classList.toggle('active', s === sub);
+      });
+      document.querySelectorAll('[data-about-sub]').forEach(function(btn){
+        btn.setAttribute('aria-current', btn.getAttribute('data-about-sub') === sub ? 'true' : 'false');
+      });
+    }
+
+    function showPage(name, sub){
+      if(pages.indexOf(name) === -1) name = "home";
+      pages.forEach(function(p){
+        var el = document.getElementById('page-' + p);
+        if(el) el.classList.toggle('active', p === name);
+      });
+      document.querySelectorAll('.navlinks button').forEach(function(btn){
+        if(btn.getAttribute('data-nav') === name){ btn.setAttribute('aria-current','page'); }
+        else { btn.removeAttribute('aria-current'); }
+      });
+      aboutSubnavEl.hidden = (name !== 'about');
+      if(name === 'about'){ showAboutSub(sub); }
+      window.scrollTo({top:0, behavior:'auto'});
+    }
+
+    function parseHash(){
+      var h = location.hash.replace('#','');
+      var parts = h.split(':');
+      return { page: parts[0] || 'home', sub: parts[1] };
+    }
+
+    window.addEventListener('hashchange', function(){
+      var parsed = parseHash();
+      showPage(parsed.page, parsed.sub);
+    });
+
+    document.querySelectorAll('[data-nav]').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        location.hash = btn.getAttribute('data-nav');
+      });
+    });
+    document.querySelectorAll('[data-about-nav]').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        location.hash = 'about:' + btn.getAttribute('data-about-nav');
+      });
+    });
+    document.querySelectorAll('[data-about-sub]').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        location.hash = 'about:' + btn.getAttribute('data-about-sub');
+      });
+    });
+
+    // Toast
+    var toastEl = document.getElementById('toast');
+    var toastTimer;
+    function toast(msg){
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 3200);
+    }
+
+    // Newsletter (decorative)
+    var newsletterForm = document.getElementById('newsletterForm');
+    if(newsletterForm) newsletterForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      toast("This is a draft — the newsletter signup isn't connected yet.");
+    });
+
+    // Contact form -> mailto
+    var contactForm = document.getElementById('contactForm');
+    if(contactForm) contactForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var first = document.getElementById('cf-first').value.trim();
+      var last = document.getElementById('cf-last').value.trim();
+      var email = document.getElementById('cf-email').value.trim();
+      var role = document.getElementById('cf-role').value;
+      var msg = document.getElementById('cf-msg').value.trim();
+      var subject = "ARCH REACH website contact — " + (role || "General inquiry");
+      var body = "Name: " + first + " " + last + "\nEmail: " + email + "\nYou are: " + role + "\n\nMessage:\n" + msg;
+      var mailto = "mailto:samselsky@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      window.location.href = mailto;
+      toast("Opening your email app to send this to samselsky@gmail.com…");
+    });
+
+    // Init from hash (or default to home)
+    var initial = parseHash();
+    showPage(initial.page, initial.sub);
+  })();
+</script>
+
+</body>
+</html>
