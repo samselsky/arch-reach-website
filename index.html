@@ -373,8 +373,6 @@
 </head>
 <body>
 
-<div class="draftbar">🔒 <strong>Draft preview</strong> — private working copy for internal review, not the live ARCH REACH site. Sample names, papers, and news items are placeholders.</div>
-
 <header class="site">
   <nav class="wrap">
     <button class="brand" data-nav="home" aria-label="ARCH REACH home">
@@ -434,13 +432,6 @@
         </div>
 
         <div class="latest-strip">
-          <div class="latest-item">
-            <span class="latest-tag">News</span>
-            <div>
-              <h3>Transdisciplinary Community Partner Board convenes</h3>
-              <p>The Dissemination Core welcomed the center's first community partner meeting this July.</p>
-            </div>
-          </div>
           <div class="latest-item">
             <span class="latest-tag">Paper</span>
             <div>
@@ -671,7 +662,6 @@
           <h1>News &amp; Updates</h1>
           <p>What's happening across ARCH REACH's Cores, projects, and community partnerships.</p>
         </div>
-        <div class="note"><strong>Sample posts shown for layout</strong> — replace with real center updates once available.</div>
 
         <div class="newsline">
           <div class="newsitem">
@@ -679,32 +669,6 @@
             <h3>ARCH REACH launches</h3>
             <p>ARCH REACH officially begins its first project year, building on more than a decade of ARCH research within CNICS.</p>
           </div>
-          <div class="newsitem">
-            <span class="date">July 2026</span>
-            <h3>Transdisciplinary Community Partner Board convenes</h3>
-            <p>The Dissemination Core welcomed the center's first community partner board meeting, bringing together members with lived experience to help shape ARCH REACH's research priorities.</p>
-          </div>
-          <div class="newsitem">
-            <span class="date">June 2026</span>
-            <h3>T-BAI design sessions begin</h3>
-            <p>The T-BAI team began human-centered design sessions with patients and clinicians at UW/Harborview HIV clinics to adapt an existing alcohol counseling program for telephone delivery.</p>
-          </div>
-          <div class="newsitem">
-            <span class="date">May 2026</span>
-            <h3>ARCH-STAR site preparation underway</h3>
-            <p>Teams at UC San Diego and the University of Miami began preparing clinic workflows for the ARCH-STAR stepped-care pilot addressing unhealthy alcohol use and co-occurring depression or anxiety.</p>
-          </div>
-        </div>
-
-        <div class="signup">
-          <div>
-            <h3>Get updates by email</h3>
-            <p>A monthly note on new findings, papers, and events. (Draft — not yet connected.)</p>
-          </div>
-          <form id="newsletterForm">
-            <input type="email" placeholder="you@example.com" aria-label="Email address" required>
-            <button class="btn btn-primary" type="submit">Subscribe</button>
-          </form>
         </div>
       </section>
     </div>
@@ -719,39 +683,7 @@
           <h1>Contact Us</h1>
         </div>
         <div class="contact-wrap">
-          <form class="contactform" id="contactForm">
-            <div class="namerow">
-              <div>
-                <label for="cf-first">First name <span class="req">*</span></label>
-                <input id="cf-first" type="text" required>
-              </div>
-              <div>
-                <label for="cf-last">Last name <span class="req">*</span></label>
-                <input id="cf-last" type="text" required>
-              </div>
-            </div>
-            <div>
-              <label for="cf-email">Email <span class="req">*</span></label>
-              <input id="cf-email" type="email" required>
-            </div>
-            <div>
-              <label for="cf-role">You are a <span class="req">*</span></label>
-              <select id="cf-role" required>
-                <option value="" disabled selected>Select one…</option>
-                <option>Person with HIV</option>
-                <option>Community member / partner</option>
-                <option>Researcher / clinician</option>
-                <option>Member of the media</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div>
-              <label for="cf-msg">Question or comment <span class="req">*</span></label>
-              <textarea id="cf-msg" required></textarea>
-            </div>
-            <button class="btn btn-primary" type="submit" style="align-self:flex-start;">Send message</button>
-            <p class="formfoot">Draft note: this prototype opens your email app addressed to <strong>samselsky@gmail.com</strong> with the form details filled in. Swap in a real inbox or form service before launch.</p>
-          </form>
+          <p style="font-size:1.05rem;">For any questions, comments, or other inquiries, please contact the ARCH REACH lead research coordinator at <a href="mailto:sselsky@uw.edu">sselsky@uw.edu</a>.</p>
         </div>
       </section>
     </div>
@@ -780,8 +712,7 @@
     </div>
   </div>
   <div class="wrap footbottom">
-    <span>Private draft — for internal review only.</span>
-    <span>ARCH REACH · draft site preview</span>
+    <span>© 2026 ARCH REACH</span>
   </div>
 </footer>
 
@@ -857,29 +788,6 @@
       clearTimeout(toastTimer);
       toastTimer = setTimeout(function(){ toastEl.classList.remove('show'); }, 3200);
     }
-
-    // Newsletter (decorative)
-    var newsletterForm = document.getElementById('newsletterForm');
-    if(newsletterForm) newsletterForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      toast("This is a draft — the newsletter signup isn't connected yet.");
-    });
-
-    // Contact form -> mailto
-    var contactForm = document.getElementById('contactForm');
-    if(contactForm) contactForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      var first = document.getElementById('cf-first').value.trim();
-      var last = document.getElementById('cf-last').value.trim();
-      var email = document.getElementById('cf-email').value.trim();
-      var role = document.getElementById('cf-role').value;
-      var msg = document.getElementById('cf-msg').value.trim();
-      var subject = "ARCH REACH website contact — " + (role || "General inquiry");
-      var body = "Name: " + first + " " + last + "\nEmail: " + email + "\nYou are: " + role + "\n\nMessage:\n" + msg;
-      var mailto = "mailto:samselsky@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-      window.location.href = mailto;
-      toast("Opening your email app to send this to samselsky@gmail.com…");
-    });
 
     // Init from hash (or default to home)
     var initial = parseHash();
