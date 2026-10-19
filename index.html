@@ -136,6 +136,12 @@
     font-size:0.95rem; font-weight:600; color:var(--muted);
     padding:8px 12px; border-radius:8px; position:relative;
   }
+  .navlinks a.navext{
+    font-size:0.95rem; font-weight:600; color:var(--muted); text-decoration:none;
+    padding:8px 12px; border-radius:8px; position:relative; display:inline-block; line-height:1.4; font-family:inherit;
+  }
+  .navlinks a.navext:hover{ color:var(--ink); background:var(--surface-2); }
+  .navlinks a.navext:focus-visible{ outline:2px solid var(--focus); outline-offset:2px; }
   .navlinks button:hover{ color:var(--ink); background:var(--surface-2); }
   .navlinks button[aria-current="page"]{ color:var(--teal-deep); }
   @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .navlinks button[aria-current="page"]{ color: var(--teal); } }
@@ -245,6 +251,32 @@
   .profile p.desc{ font-size:0.94rem; color:var(--ink); margin:0; }
   .profile h3{ font-size:1.12rem; margin-bottom:2px; }
 
+  /* ============ Team bios ============ */
+  .teamgroup{ font-size:1.15rem; margin:34px 0 14px; padding-bottom:6px; border-bottom:1px solid var(--line); color:var(--teal-deep); }
+  .teamgroup:first-of-type{ margin-top:6px; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .teamgroup{ color:var(--teal); } }
+  :root[data-theme="dark"] .teamgroup{ color:var(--teal); }
+  .teamgrid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(340px,1fr)); gap:18px; }
+  .person{
+    display:flex; gap:18px; align-items:flex-start;
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px; box-shadow:var(--shadow); border-top:3px solid var(--accent, var(--teal));
+  }
+  .headshot{
+    flex:0 0 84px; width:84px; height:84px; border-radius:50%;
+    background:var(--surface-2); border:1.5px dashed var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--muted); font-family:'Fraunces',serif; font-size:1.35rem; letter-spacing:0.02em;
+    position:relative; overflow:hidden;
+  }
+  .headshot img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; background:var(--surface-2); }
+  .person h4{ font-family:'Fraunces',serif; font-size:1.08rem; margin:0 0 2px; line-height:1.25; }
+  .person h4 .cred{ font-family:'Public Sans',sans-serif; font-weight:500; font-size:0.85rem; color:var(--muted); }
+  .person .prole{ font-size:0.82rem; font-weight:700; color:var(--accent, var(--teal)); margin:0 0 4px; }
+  .person .ppos{ font-size:0.84rem; color:var(--muted); font-style:italic; margin:0 0 10px; }
+  .person .pbio{ font-size:0.92rem; margin:0; }
+  @media (max-width:520px){ .teamgrid{ grid-template-columns:1fr; } .person{ flex-direction:column; } }
+
   .placeholder-card{
     border:1.5px dashed var(--line); border-radius:var(--radius); padding:22px;
     color:var(--muted); font-size:0.92rem; background:var(--surface-2);
@@ -290,6 +322,10 @@
     border:1px solid var(--line); border-radius:var(--radius); background:var(--surface);
     padding:22px 24px; margin-bottom:16px; box-shadow:var(--shadow);
   }
+  .yearhead{ font-size:1.5rem; color:var(--teal-deep); margin:34px 0 14px; padding-bottom:8px; border-bottom:2px solid var(--terracotta); font-variant-numeric:tabular-nums; }
+  .yearhead:first-child{ margin-top:0; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .yearhead{ color:var(--teal); } }
+  :root[data-theme="dark"] .yearhead{ color:var(--teal); }
   .papercard .meta{ display:flex; gap:10px; align-items:center; margin-bottom:8px; flex-wrap:wrap; }
   .papercard .year{ font-size:0.82rem; color:var(--muted); font-variant-numeric:tabular-nums; }
   .papercard h3{ font-size:1.05rem; margin:0 0 4px; }
@@ -384,6 +420,7 @@
       <button data-nav="papers">Papers</button>
       <button data-nav="news">News</button>
       <button data-nav="contact">Contact</button>
+      <a class="navext" href="https://uwnetid.sharepoint.com/sites/arch_reach/SitePages/CollabHome.aspx" target="_blank" rel="noopener" title="Opens the internal ARCH REACH SharePoint site (UW NetID login required)">Internal</a>
     </div>
   </nav>
   <div class="subnav" id="aboutSubnav" hidden>
@@ -470,10 +507,156 @@
             <h2>Our Team</h2>
             <p>Leadership, investigators, staff, and trainees across ARCH REACH's Cores and projects.</p>
           </div>
-          <div class="placeholder-card teamnote">
-            <span style="font-size:1.4rem;">🖼️</span>
-            <div>
-              <strong style="color:var(--ink);">Full roster coming soon.</strong> This page will list ARCH REACH's leadership, investigators, staff, and trainees by Core and Project, with photos and short bios — plus recognition for the Transdisciplinary Community Partner Board (TCPB), similar to a Directory page.
+          <h3 class="teamgroup">Administrative Core</h3>
+          <div class="teamgrid">
+            <div class="person" style="--accent:var(--teal);">
+              <div class="headshot"><span>GC</span><img src="headshots/geetanjali-chander.jpg" alt="Headshot of Geetanjali Chander" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>Geetanjali Chander, <span class="cred">MD, MPH</span></h4>
+                <p class="prole">Director and Principal Investigator; Administrative Core Lead</p>
+                <p class="ppos">Professor of Medicine and Division Head, General Internal Medicine, University of Washington</p>
+                <p class="pbio">Dr. Chander directs ARCH REACH and chairs its Steering Committee. She is a general internist whose research focuses on alcohol use among people with HIV and on putting behavioral and medication treatments for alcohol use into everyday HIV care. She is overall multiple principal investigator of the Alcohol Research Consortium in HIV (ARCH) and a long-standing mentor to early-career investigators.</p>
+              </div>
+            </div>
+            <div class="person" style="--accent:var(--teal);">
+              <div class="headshot"><span>SS</span><img src="headshots/sam-selsky.jpg" alt="Headshot of Sam Selsky" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>Sam Selsky, <span class="cred">PhD</span></h4>
+                <p class="prole">Research Coordinator, Administrative Core</p>
+                <p class="ppos">University of Washington</p>
+                <p class="pbio">Sam coordinates day-to-day operations for the Administrative Core and is the main point of contact for general questions about ARCH REACH.</p>
+              </div>
+            </div>
+          </div>
+          <h3 class="teamgroup">Methods Core</h3>
+          <div class="teamgrid">
+            <div class="person" style="--accent:var(--gold);">
+              <div class="headshot"><span>JD</span><img src="headshots/joseph-a-delaney.jpg" alt="Headshot of Joseph A. Delaney" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>Joseph A. Delaney, <span class="cred">PhD</span></h4>
+                <p class="prole">Co-Lead, Methods Core (Biostatistical Methods)</p>
+                <p class="ppos">Research Associate Professor of Medicine (General Internal Medicine) and Adjunct, Epidemiology, University of Washington</p>
+                <p class="pbio">Dr. Delaney is an epidemiologist who studies HIV and its related conditions, with a focus on substance use, cardiovascular disease, and longitudinal methods. In ARCH REACH he leads the Methods Core's biostatistics work, including machine learning and causal inference approaches.</p>
+              </div>
+            </div>
+            <div class="person" style="--accent:var(--gold);">
+              <div class="headshot"><span>EW</span><img src="headshots/emily-c-williams.jpg" alt="Headshot of Emily C. Williams" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>Emily C. Williams, <span class="cred">PhD, MPH</span></h4>
+                <p class="prole">Co-Lead, Methods Core (Implementation Methods)</p>
+                <p class="ppos">Professor, Health Systems and Population Health, University of Washington School of Public Health</p>
+                <p class="pbio">Dr. Williams is a health services researcher and implementation scientist who studies how people get evidence-based care for substance use and HIV. She co-leads the Methods Core and guides the mixed-methods evaluation of the study's implementation projects.</p>
+              </div>
+            </div>
+            <div class="person" style="--accent:var(--gold);">
+              <div class="headshot"><span>LD</span><img src="headshots/lydia-n-drumright.jpg" alt="Headshot of Lydia N. Drumright" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>Lydia N. Drumright, <span class="cred">PhD, MPH</span></h4>
+                <p class="prole">Co-Investigator, Methods Core</p>
+                <p class="ppos">Research Associate Professor, Biobehavioral Nursing &amp; Health Informatics, University of Washington School of Nursing</p>
+                <p class="pbio">Dr. Drumright is an epidemiologist and health informatician who studies HIV and substance use. She brings expertise in health informatics, data infrastructure, and network-level analysis to the Methods Core. She also co-leads a coordinating center for cohorts of people with HIV and substance use.</p>
+              </div>
+            </div>
+            <div class="person" style="--accent:var(--gold);">
+              <div class="headshot"><span>EA</span><img src="headshots/elizabeth-j-austin.jpg" alt="Headshot of Elizabeth J. Austin" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>Elizabeth J. Austin, <span class="cred">PhD, MPH</span></h4>
+                <p class="prole">Co-Investigator, Methods Core (Implementation Methods)</p>
+                <p class="ppos">Research Assistant Professor, General Internal Medicine, University of Washington</p>
+                <p class="pbio">Dr. Austin is an implementation scientist whose work looks at how mental health and substance use care is delivered, including how patient-reported measures can be used in routine care. In ARCH REACH she supports qualitative and mixed-methods work and intervention design across the projects.</p>
+              </div>
+            </div>
+            <div class="person" style="--accent:var(--gold);">
+              <div class="headshot"><span>MB</span><img src="headshots/madeleine-bentley.jpg" alt="Headshot of Madeleine Bentley" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>Madeleine Bentley</h4>
+                <p class="prole">Co-Investigator, Methods Core</p>
+                <p class="pbio">Madeleine is a co-investigator on the ARCH REACH Methods Core, which provides statistical and implementation science expertise across all of the center's projects.</p>
+              </div>
+            </div>
+          </div>
+          <h3 class="teamgroup">Dissemination Core</h3>
+          <div class="teamgrid">
+            <div class="person" style="--accent:var(--terracotta);">
+              <div class="headshot"><span>DB</span><img src="headshots/d-scott-batey.jpg" alt="Headshot of D. Scott Batey" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>D. Scott Batey, <span class="cred">PhD, MSW</span></h4>
+                <p class="prole">Lead, Dissemination Core</p>
+                <p class="ppos">Professor and Senior Associate Dean for Faculty Affairs &amp; Faculty Development, Tulane University School of Social Work</p>
+                <p class="pbio">Dr. Batey is a licensed clinical social worker and community-engaged researcher whose work focuses on improving outcomes along the HIV care continuum. He leads the Dissemination Core and its Transdisciplinary Community Partner Board, connecting the research team with community partners.</p>
+              </div>
+            </div>
+          </div>
+          <h3 class="teamgroup">ARCH REACH ERA (Project 1)</h3>
+          <div class="teamgrid">
+            <div class="person" style="--accent:var(--terracotta);">
+              <div class="headshot"><span>HC</span><img src="headshots/heidi-m-crane.jpg" alt="Headshot of Heidi M. Crane" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>Heidi M. Crane, <span class="cred">MD, MPH</span></h4>
+                <p class="prole">Lead, ARCH REACH ERA (Project 1)</p>
+                <p class="ppos">Professor of Medicine, Allergy &amp; Infectious Diseases, University of Washington</p>
+                <p class="pbio">Dr. Crane is an infectious disease physician and researcher who studies chronic complications of HIV, medication adherence, and substance use. She leads the CNICS patient-reported outcomes work, which gathers information from patients at routine HIV clinic visits, and directs the Madison HIV Metabolic Clinic.</p>
+              </div>
+            </div>
+          </div>
+          <h3 class="teamgroup">ARCH REACH T-BAI (Project 2)</h3>
+          <div class="teamgrid">
+            <div class="person" style="--accent:var(--terracotta);">
+              <div class="headshot"><span>JT</span><img src="headshots/judith-i-tsui.jpg" alt="Headshot of Judith I. Tsui" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>Judith I. Tsui, <span class="cred">MD, MPH</span></h4>
+                <p class="prole">Multiple Principal Investigator, T-BAI (Project 2)</p>
+                <p class="ppos">Professor of Medicine, General Internal Medicine, University of Washington</p>
+                <p class="pbio">Dr. Tsui is an addiction medicine physician and researcher focused on improving care for people who use drugs, including treatment for opioid use disorder and hepatitis C and substance use among people with HIV. She directs the UW/Fred Hutch CFAR Substance Use Scientific Working Group and the UW Medical Student Addiction Research Program.</p>
+              </div>
+            </div>
+            <div class="person" style="--accent:var(--terracotta);">
+              <div class="headshot"><span>HK</span><img src="headshots/h-nina-kim.jpg" alt="Headshot of H. Nina Kim" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>H. Nina Kim, <span class="cred">MD, MSc</span></h4>
+                <p class="prole">Multiple Principal Investigator, T-BAI (Project 2)</p>
+                <p class="ppos">Professor of Medicine, Allergy &amp; Infectious Diseases, University of Washington</p>
+                <p class="pbio">Dr. Kim is an infectious disease physician who studies viral hepatitis and liver disease in people with HIV, including the role of alcohol. She sees patients at Harborview's Madison Clinic and directs the AID Research Collaboratory, which supports electronic health record research and mentoring.</p>
+              </div>
+            </div>
+            <div class="person" style="--accent:var(--terracotta);">
+              <div class="headshot"><span>HH</span><img src="headshots/heidi-hutton.jpg" alt="Headshot of Heidi Hutton" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>Heidi Hutton, <span class="cred">PhD</span></h4>
+                <p class="prole">Co-Investigator, T-BAI (Project 2)</p>
+                <p class="ppos">Associate Professor of Psychiatry and Behavioral Sciences, Johns Hopkins School of Medicine</p>
+                <p class="pbio">Dr. Hutton is a clinical psychologist who has developed and tested counselor- and computer-delivered brief alcohol interventions for people with HIV, in the U.S. and internationally. These interventions are the foundation for the T-BAI intervention.</p>
+              </div>
+            </div>
+          </div>
+          <h3 class="teamgroup">ARCH REACH STAR (Project 3)</h3>
+          <div class="teamgrid">
+            <div class="person" style="--accent:var(--terracotta);">
+              <div class="headshot"><span>DG</span><img src="headshots/david-grelotti.jpg" alt="Headshot of David Grelotti" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>David Grelotti, <span class="cred">MD</span></h4>
+                <p class="prole">Multiple Principal Investigator, STAR (Project 3)</p>
+                <p class="ppos">Clinical Professor of Psychiatry, University of California San Diego</p>
+                <p class="pbio">Dr. Grelotti is a psychiatrist and addiction medicine provider whose work spans HIV psychiatry and clinical research. He cares for patients at UC San Diego's Owen Clinic and co-leads ARCH REACH's telemedicine-based project for people with HIV who have both unhealthy alcohol use and depression or anxiety.</p>
+              </div>
+            </div>
+            <div class="person" style="--accent:var(--terracotta);">
+              <div class="headshot"><span>SS</span><img src="headshots/steven-a-safren.jpg" alt="Headshot of Steven A. Safren" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>Steven A. Safren, <span class="cred">PhD</span></h4>
+                <p class="prole">Co-Investigator, STAR (Project 3)</p>
+                <p class="ppos">Professor of Psychology and Director, Center for HIV and Research in Mental Health, University of Miami</p>
+                <p class="pbio">Dr. Safren develops and tests behavioral treatments that address mental health and substance use alongside HIV care and prevention. His cognitive behavioral therapy approach for adherence and co-occurring conditions is the basis for the therapy delivered in STAR.</p>
+              </div>
+            </div>
+            <div class="person" style="--accent:var(--terracotta);">
+              <div class="headshot"><span>JM</span><img src="headshots/jessica-l-montoya.jpg" alt="Headshot of Jessica L. Montoya" loading="lazy" onerror="this.remove()"></div>
+              <div class="pbody">
+                <h4>Jessica L. Montoya, <span class="cred">PhD</span></h4>
+                <p class="prole">Co-Investigator, STAR (Project 3)</p>
+                <p class="ppos">Assistant Professor of Psychiatry, University of California San Diego</p>
+                <p class="pbio">Dr. Montoya is a clinical psychologist and implementation scientist who studies how to keep people with HIV engaged in treatment when substance use gets in the way, including incentive-based approaches for people who use methamphetamine.</p>
+              </div>
             </div>
           </div>
         </section>
@@ -600,50 +783,46 @@
           <p>Peer-reviewed work from the ARCH REACH team, in plain language.</p>
         </div>
         <div id="paperList">
+          <h2 class="yearhead">2026</h2>
           <div class="papercard">
-            <div class="meta"><span class="year">2026</span></div>
             <h3><a href="https://pubmed.ncbi.nlm.nih.gov/41348309/" target="_blank" rel="noopener">Healthcare Provider Perceptions on Screening and Treatment for Unhealthy Alcohol Use in HIV Primary Care Settings</a></h3>
             <p class="cite">Kennedy AJ, et al. <em>AIDS and Behavior</em></p>
             <p class="summary"><span class="lbl">Summary: </span>Interviews with 19 healthcare providers across three HIV clinics found that mixed confidence in screening tools, discomfort with alcohol medications, and competing priorities make it harder to address unhealthy alcohol use in HIV care — while embedding alcohol treatment directly in HIV clinics, having a clinical champion, and offering telemedicine made it easier.</p>
           </div>
           <div class="papercard">
-            <div class="meta"><span class="year">2026</span></div>
             <h3><a href="https://pubmed.ncbi.nlm.nih.gov/41918133/" target="_blank" rel="noopener">Practice facilitation to implement stepped care for unhealthy alcohol use in HIV clinics: study protocol for a type III hybrid effectiveness-implementation study</a></h3>
             <p class="cite">Chander G, et al. <em>Addiction Science &amp; Clinical Practice</em></p>
             <p class="summary"><span class="lbl">Summary: </span>This paper lays out the design of the ARCH REACH clinical study: testing whether hands-on support for clinic staff, called practice facilitation, helps HIV clinics successfully adopt a "stepped" model of alcohol care that starts with brief counseling and steps up to more intensive treatment for patients who need it.</p>
           </div>
+          <h2 class="yearhead">2025</h2>
           <div class="papercard">
-            <div class="meta"><span class="year">2025</span></div>
             <h3><a href="https://pubmed.ncbi.nlm.nih.gov/41260023/" target="_blank" rel="noopener">Brief report: Are changes in cannabis use frequency associated with changes in alcohol use and smoking among people with HIV (PWH) — a substitution question</a></h3>
             <p class="cite">Whitney BM, et al. <em>Drug and Alcohol Dependence</em></p>
             <p class="summary"><span class="lbl">Summary: </span>Some have hypothesized that using more cannabis might lead people to cut back on alcohol or cigarettes. In a large group of people with HIV followed over more than a decade, the opposite was true: increasing cannabis use was linked to more drinking days and higher odds of hazardous drinking, while cutting back on cannabis was linked to less alcohol and cigarette use.</p>
           </div>
           <div class="papercard">
-            <div class="meta"><span class="year">2025</span></div>
             <h3><a href="https://pubmed.ncbi.nlm.nih.gov/40792693/" target="_blank" rel="noopener">Alcohol use disorder, but not current alcohol use, is associated with falls among people with HIV in care</a></h3>
             <p class="cite">Dai M, et al. <em>AIDS</em></p>
             <p class="summary"><span class="lbl">Summary: </span>Looking at nearly 5,700 people with HIV in care, researchers found that having an alcohol use disorder diagnosis — but not alcohol use itself — was linked to a higher risk of falling in the past year, suggesting something other than being drunk in the moment may explain the connection.</p>
           </div>
+          <h2 class="yearhead">2024</h2>
           <div class="papercard">
-            <div class="meta"><span class="year">2024</span></div>
             <h3><a href="https://pubmed.ncbi.nlm.nih.gov/38421512/" target="_blank" rel="noopener">Association of Alcohol Use with COVID-19 Infection and Hospitalization Among People Living with HIV in the United States, 2020</a></h3>
             <p class="cite">Xia C, et al. <em>AIDS and Behavior</em></p>
             <p class="summary"><span class="lbl">Summary: </span>Using health records from over 5,000 people with HIV in care during 2020, this study found that rates of COVID-19 diagnosis and hospitalization were somewhat higher among people who drank more, though the differences were not statistically significant — suggesting alcohol use had, at most, a modest effect on COVID-19 risk in this group.</p>
           </div>
           <div class="papercard">
-            <div class="meta"><span class="year">2024</span></div>
             <h3><a href="https://pubmed.ncbi.nlm.nih.gov/38150572/" target="_blank" rel="noopener">Evaluating the Sick Quitting Hypothesis for Frailty Status and Reducing Alcohol Use Among People With HIV in a Longitudinal Clinical Cohort Study</a></h3>
             <p class="cite">Ruderman SA, et al. <em>Journal of the Association of Nurses in AIDS Care</em></p>
             <p class="summary"><span class="lbl">Summary: </span>"Sick quitting" describes people cutting back on alcohol because their health is declining, which can make alcohol look protective against frailty in research when it isn't. This study followed over 5,600 people with HIV and found that those who became frail were more likely to later quit or cut back on drinking, supporting sick quitting as an explanation researchers need to account for.</p>
           </div>
+          <h2 class="yearhead">2023</h2>
           <div class="papercard">
-            <div class="meta"><span class="year">2023</span></div>
             <h3><a href="https://pubmed.ncbi.nlm.nih.gov/37442307/" target="_blank" rel="noopener">Alcohol use and the longitudinal HIV care continuum for people with HIV who enrolled in care between 2011 and 2019</a></h3>
             <p class="cite">Lesko CR, et al. <em>Annals of Epidemiology</em></p>
             <p class="summary"><span class="lbl">Summary: </span>Following nearly 1,800 people with HIV for several years after they entered care, this study found that those who reported unhealthy or moderate alcohol use at the start spent more time out of HIV care than those who didn't drink, though alcohol use wasn't linked to differences in time spent virally suppressed.</p>
           </div>
           <div class="papercard">
-            <div class="meta"><span class="year">2023</span></div>
             <h3><a href="https://pubmed.ncbi.nlm.nih.gov/37476695/" target="_blank" rel="noopener">The temporal relationship of alcohol use and subsequent self-reported health status among people with HIV</a></h3>
             <p class="cite">Pytell JD, et al. <em>The American Journal of Medicine Open</em></p>
             <p class="summary"><span class="lbl">Summary: </span>In a study of over 5,000 people with HIV, heavy alcohol use was linked to worse self-reported health at later visits among women, but not among men — a pattern not explained by depression symptoms, suggesting the health effects of drinking may differ by gender.</p>
